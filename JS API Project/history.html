@@ -1,1 +1,97 @@
 history
+<html>
+    <head>
+        <title>History</title>
+        <style>
+            #key{
+                font-style:italic;
+            }
+            #value{
+                font-weight: bold;
+            }
+            #container{
+                background-color: burlywood;
+                border: 1px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+        <div id="history">
+            Space X history
+        </div>
+        <div id="apiInfo">
+            Space X API Info
+        </div>
+    </div>
+
+        <div id="container">
+
+        </div>
+    </body>
+    <script>
+        var historyuRL = "https://api.spacexdata.com/v3/info"
+        var apiInfoUrl = "https://api.spacexdata.com/v3"
+
+    document.getElementById("history").addEventListener("click",function(){displayHistory(historyuRL)})
+    document.getElementById("apiInfo").addEventListener("click",function(){displayAPIInfo(apiInfoUrl)})
+        
+
+        function displayHistory(url){
+            var info = JSON.parse(localStorage.getItem(info))
+            if(info){
+                console.log("in history true",info)
+                print(info)
+            }
+            else{
+                var xhr = new XMLHttpRequest()
+                xhr.open("GET",url)
+                xhr.send()
+                xhr.onload = function(){
+                    if(xhr.status == 200){
+                        localStorage.setItem("info",xhr.response)
+                        print(JSON.parse(xhr.response))
+                    }
+                }
+                xhr.onerror= function(){
+                    console.log("error in xhr with code",xhr.status)
+                }
+                        }
+
+        }
+
+        function displayAPIInfo(url){
+            var apiInfo = JSON.parse(localStorage.getItem(apiInfo))
+            if(apiInfo){
+                console.log("in history true",info)
+                print(apiInfo)
+            }
+            else{
+                var xhr = new XMLHttpRequest()
+                xhr.open("GET",url)
+                xhr.send()
+                xhr.onload = function(){
+                    if(xhr.status == 200){
+                        localStorage.setItem("apinfo",xhr.response)
+                        print(JSON.parse(xhr.response))
+                    }
+                }
+                xhr.onerror= function(){
+                    console.log("error in xhr with code",xhr.status)
+                }
+                        }
+
+        }
+
+        function print(data){
+            console.log(data)
+            var container = document.getElementById("container")
+            container.innerHTML = ""
+            for( key in data){
+                var keyValue = document.createElement("div")                
+                keyValue.innerHTML ="<p>"+"<span id= \"key\">"+ key +":</span>" +" " +"<span id= \"value\">"+ data[key] +"</span>"+"</p>"
+                container.append(keyValue)
+            }
+        }
+    </script>
+</html>
