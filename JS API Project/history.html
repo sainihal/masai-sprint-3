@@ -1,97 +1,250 @@
-history
 <html>
-    <head>
-        <title>History</title>
-        <style>
-            #key{
-                font-style:italic;
-            }
-            #value{
-                font-weight: bold;
-            }
-            #container{
-                background-color: burlywood;
-                border: 1px solid black;
-            }
-        </style>
-    </head>
-    <body>
-        <div>
-        <div id="history">
-            Space X history
+
+<head>
+    <title>History</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            background-image: url(..\\JS%20API%20Project\\resources\\index-bg.png);
+            background-size: 100% 100%;
+
+        }
+
+        #key {
+            font-style: italic;
+        }
+
+        #value {
+            font-weight: bold;
+        }
+
+        #container {
+            background-color: rgb(222, 184, 135, 0.3);
+            border: 1px solid black;
+        }
+
+        p {
+            /* text-align: center; */
+            margin-left: 5%;
+        }
+
+        .display {
+            border: 1px solid grey;
+            /* background-color:rgb(222, 184, 135,0.3); */
+            background-color: rgb(0, 0, 0, 0.5);
+            padding: 25px;
+            border-radius: 25%;
+            width: 100px;
+            height: 50px;
+            text-align: center;
+            color: white;
+        }
+
+        .display:hover {
+            border: 1px solid grey;
+            background-color: black;
+            padding: 25px;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        #menu {
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        h3 {
+            /* text-align: center; */
+            margin-left: 4%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="menu">
+        <div class="display" id="home">Home</div>
+
+        <div class="display" id="history">
+            Space X History
         </div>
-        <div id="apiInfo">
+        <div class="display" id="apiInfo">
             Space X API Info
         </div>
+        <div class="display" id="hisEve">
+            Space X Historical Events
+        </div>
+        <div class="display" id="hisEveById">
+            Space X Historical Event by ID
+        </div>
+
+
     </div>
 
-        <div id="container">
+    <div id="container">
 
-        </div>
-    </body>
-    <script>
-        var historyuRL = "https://api.spacexdata.com/v3/info"
-        var apiInfoUrl = "https://api.spacexdata.com/v3"
+    </div>
+</body>
+<script>
+    document.getElementById("home").addEventListener("click", navToHome)
 
-    document.getElementById("history").addEventListener("click",function(){displayHistory(historyuRL)})
-    document.getElementById("apiInfo").addEventListener("click",function(){displayAPIInfo(apiInfoUrl)})
-        
+    var historyURL = "https://api.spacexdata.com/v3/info"
+    var apiInfoURL = "https://api.spacexdata.com/v3"
+    var historicalEventsURL = "https://api.spacexdata.com/v3/history"
+    var getHistoricEventByID = "https://api.spacexdata.com/v3/history"
 
-        function displayHistory(url){
-            var info = JSON.parse(localStorage.getItem(info))
-            if(info){
-                console.log("in history true",info)
-                print(info)
+    document.getElementById("history").addEventListener("click", function () { displayHistory(historyURL) })
+    document.getElementById("apiInfo").addEventListener("click", function () { displayAPIInfo(apiInfoURL) })
+    document.getElementById("hisEve").addEventListener("click", function () { displayHistoricalEvents(historicalEventsURL) })
+    document.getElementById("hisEveById").addEventListener("click", function () { procesdisplayHistoricEvent(getHistoricEventByID) })
+
+    function navToHome() {
+        location = "index.html"
+    }
+    function displayHistoricalEvents(url) {
+        var hisEve = JSON.parse(localStorage.getItem(hisEve))
+        if (hisEve) {
+            console.log("in history true", hisEve)
+            print(hisEve, false)
+        }
+        else {
+            var xhr = new XMLHttpRequest()
+            xhr.open("GET", url)
+            xhr.send()
+            xhr.onload = function () {
+                if (xhr.status == 200) {
+                    localStorage.setItem("hisEve", xhr.response)
+                    print(JSON.parse(xhr.response), false)
+                }
             }
-            else{
-                var xhr = new XMLHttpRequest()
-                xhr.open("GET",url)
-                xhr.send()
-                xhr.onload = function(){
-                    if(xhr.status == 200){
-                        localStorage.setItem("info",xhr.response)
-                        print(JSON.parse(xhr.response))
-                    }
-                }
-                xhr.onerror= function(){
-                    console.log("error in xhr with code",xhr.status)
-                }
-                        }
-
+            xhr.onerror = function () {
+                console.log("error in xhr with code", xhr.status)
+            }
         }
 
-        function displayAPIInfo(url){
-            var apiInfo = JSON.parse(localStorage.getItem(apiInfo))
-            if(apiInfo){
-                console.log("in history true",info)
-                print(apiInfo)
-            }
-            else{
-                var xhr = new XMLHttpRequest()
-                xhr.open("GET",url)
-                xhr.send()
-                xhr.onload = function(){
-                    if(xhr.status == 200){
-                        localStorage.setItem("apinfo",xhr.response)
-                        print(JSON.parse(xhr.response))
-                    }
-                }
-                xhr.onerror= function(){
-                    console.log("error in xhr with code",xhr.status)
-                }
-                        }
+    }
 
+    function displayHistory(url) {
+        var info = JSON.parse(localStorage.getItem(info))
+        if (info) {
+            console.log("in history true", info)
+            print(info, false)
+        }
+        else {
+            var xhr = new XMLHttpRequest()
+            xhr.open("GET", url)
+            xhr.send()
+            xhr.onload = function () {
+                if (xhr.status == 200) {
+                    localStorage.setItem("info", xhr.response)
+                    print(JSON.parse(xhr.response), false)
+                }
+            }
+            xhr.onerror = function () {
+                console.log("error in xhr with code", xhr.status)
+            }
         }
 
-        function print(data){
-            console.log(data)
-            var container = document.getElementById("container")
+    }
+
+    function displayAPIInfo(url) {
+        var apiInfo = JSON.parse(localStorage.getItem(apiInfo))
+        if (apiInfo) {
+            console.log("in history true", info)
+            print(apiInfo, false)
+        }
+        else {
+            var xhr = new XMLHttpRequest()
+            xhr.open("GET", url)
+            xhr.send()
+            xhr.onload = function () {
+                if (xhr.status == 200) {
+                    localStorage.setItem("apinfo", xhr.response)
+                    print(JSON.parse(xhr.response), false)
+                }
+            }
+            xhr.onerror = function () {
+                console.log("error in xhr with code", xhr.status)
+            }
+        }
+
+    }
+
+    function print(data, clear) {
+        console.log(data)
+        var container = document.getElementById("container")
+        if (!clear)
             container.innerHTML = ""
-            for( key in data){
-                var keyValue = document.createElement("div")                
-                keyValue.innerHTML ="<p>"+"<span id= \"key\">"+ key +":</span>" +" " +"<span id= \"value\">"+ data[key] +"</span>"+"</p>"
-                container.append(keyValue)
+        for (key in data) {
+            if (data[key] != null && typeof data[key] == "object") {
+                var p = document.createElement("p")
+                p.innerHTML = "<h3>" + key + "</h3>"
+                container.appendChild(p)
+                print(data[key], true)
+                continue
+            }
+            var keyValue = document.createElement("div")
+            keyValue.innerHTML = "<p>" + "<span id= \"key\">" + key + ":</span>" + " " + "<span id= \"value\">" + data[key] + "</span>" + "</p>"
+            container.append(keyValue)
+        }
+    }
+
+    function procesdisplayHistoricEvent(url) {
+        getID(url)
+        //   displayHistoricEvent(url)
+    }
+
+    function displayHistoricEvent(url) {
+        // var id = document.getElementById("eventID")
+        var container = document.getElementById("container")
+        var id = Number(document.getElementById("eventID").value)
+        container.innerHTML = ""
+        var hisEve = JSON.parse(localStorage.getItem(hisEve + "" + id))
+        if (hisEve) {
+            console.log("in history true", hisEve)
+            print(hisEve, false)
+        }
+        else {
+            var xhr = new XMLHttpRequest()
+            xhr.open("GET", url + "/" + id)
+            xhr.send()
+            xhr.onload = function () {
+                if (xhr.status == 200) {
+                    localStorage.setItem("hisEve" + id, xhr.response)
+                    print(JSON.parse(xhr.response), false)
+                }
+            }
+            xhr.onerror = function () {
+                console.log("error in xhr with code", xhr.status)
             }
         }
-    </script>
+
+
+
+
+    }
+    function getID(url) {
+        var div = document.createElement("div")
+        var container = document.getElementById("container")
+        // container.style.backgroundColor = "black"
+        container.innerHTML = ""
+        var input = document.createElement("input")
+        input.setAttribute("id", "eventID")
+        var label = document.createElement("label")
+        // label.style.color = "black"
+        label.innerText = "ID"
+        div.style.margin = "5%"
+     
+
+        label.appendChild(input)
+        var btn = document.createElement("button")
+        btn.innerText = "Submit"
+        btn.style.margin = "1%"
+        btn.addEventListener("click", function () { displayHistoricEvent(url) })
+        div.append(label, btn)
+        container.append(div)
+    }
+</script>
+
 </html>
