@@ -51,15 +51,37 @@
 <body>
    <div id="main">
     <div id="menu">
-        <div>About</div>
-        <div>History</div>
-        <div>Missions</div>
-        <div>Rockets</div>
-        <div>Dragons</div>
+        <div id="about">About</div>
+        <div id="history">History</div>
+        <div id="missions">Missions</div>
+        <div id="rockets">Rockets</div>
+        <div id="dragons">Dragons</div>
     </div>
-    <div id="title">Space X Info</div>
-
-  
+    <div id="title">Space X Info</div>  
 </div>
+<script type="text/javascript">
+document.getElementById("about").addEventListener("click",navToAbout)
+document.getElementById("history").addEventListener("click",navToHistory)
+document.getElementById("missions").addEventListener("click",navToMissions)
+document.getElementById("rockets").addEventListener("click",navToRockets)
+document.getElementById("dragons").addEventListener("click",navToDragons)
+
+function navToAbout(){
+    location = "about.html"
+}
+function navToHistory(){
+    location = "history.html"
+}
+function navToMissions(){
+    location = "missions.html"
+}
+function navToRockets(){
+    location = "rockets.html"
+}
+function navToDragons(){
+    location = "dragons.html"
+}
+
+</script>
 </body>
 </html>
