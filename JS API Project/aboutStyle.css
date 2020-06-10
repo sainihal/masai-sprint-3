@@ -1,0 +1,34 @@
+body {
+    background-color: black;
+    color: white;
+    background-image: url(..\\JS%20API%20Project\\resources\\about-bg.jpg);
+}
+
+h1 {
+    font-family: serif;
+    font-weight: bold;
+    text-align: center;
+    margin: 100px;
+}
+
+p {
+    font-size: 25px;
+}
+
+pre{
+    font-size: 25px;
+
+}
+
+#facility{
+    text-align: center;
+}
+
+#aboutTitle{
+    text-align: center;
+    /* border:1px solid blue; */
+}
+
+p{
+    margin-bottom: 50px;
+}

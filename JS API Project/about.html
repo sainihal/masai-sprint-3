@@ -2,57 +2,8 @@
 
 <head>
     <title>About</title>
-
-    <style>
-        .display{
-            border:1px solid grey;
-            /* background-color:rgb(222, 184, 135,0.3); */
-            background-color:rgb(0, 0, 0,0.5);
-            padding:25px;
-            border-radius: 25%;
-            width: 100px;
-            height:50px;
-            text-align: center;
-            color:white;
-        }
-        .display:hover{
-            border:1px solid grey;
-            background-color:black;
-            padding:25px;
-            font-size: 25px;
-            font-weight: bold;
-        }
-        body {
-            background-color: black;
-            color: white;
-        }
-
-        h1 {
-            font-family: serif;
-            font-weight: bold;
-            text-align: center;
-            margin: 100px;
-        }
-
-        p {
-            font-size: 25px;
-        }
-        pre{
-            font-size: 25px;
-
-        }
-        #facility{
-            text-align: center;
-        }
-        #aboutTitle{
-            text-align: center;
-            /* border:1px solid blue; */
-        }
-        p{
-            margin-bottom: 50px;
-        }
-   
-    </style>
+    <link href="style.css" rel="stylesheet">
+    <link href="aboutStyle.css" rel="stylesheet">
 </head>
 
 <body>
@@ -168,12 +119,8 @@
         launches of the Dragon spacecraft.
     </p>
 </body>
-<script>
-    document.getElementById("home").addEventListener("click",navToHome)
-
-    function navToHome(){
-        location = "index.html"
-    }
+<script type="text/javascript" src="about.js">
+   
 </script>
 
 </html>

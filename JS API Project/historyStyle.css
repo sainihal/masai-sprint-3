@@ -1,0 +1,42 @@
+.card {
+    border: "1px solid white"
+}
+
+body {
+    background-color: black;
+    color: white;
+    background-image: url(..\\JS%20API%20Project\\resources\\index-bg.png);
+    background-size: 100% 100%;
+
+}
+
+.key {
+    font-style: italic;
+    color: cornsilk;
+    font-size: 25px;
+}
+
+.value {
+    font-weight: bold;
+    font-size: 30px;
+}
+
+#container {
+    background-color: rgb(222, 184, 135, 0.3);
+    border: 1px solid black;
+}
+
+p {
+    margin-left: 5%;
+}
+
+h3 {
+    margin-left: 4%;
+}
+
+.linkStyle{
+    display: inline;
+    border:1px solid white;
+    color:white;
+    margin:5px;
+}
